@@ -1,4 +1,4 @@
 package com.sh.card;
 
-public class Deque {
+public class Spade {
 }

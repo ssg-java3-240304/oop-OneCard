@@ -1,7 +1,6 @@
 package com.sh;
 
 import com.sh.card.Card;
-import com.sh.card.Deque;
 
 import java.util.Scanner;
 
