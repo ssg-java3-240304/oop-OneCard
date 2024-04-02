@@ -1,4 +1,4 @@
 package com.sh.card;
 
-public class Spade {
+public class Spade extends Card{
 }
