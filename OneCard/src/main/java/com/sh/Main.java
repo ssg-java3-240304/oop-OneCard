@@ -1,21 +1,29 @@
 package com.sh;
 
+import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
 
-    private openDeque: Deque = null
-    private garbageDeque: Deque = null
-    private players: CyclicLinkedList<Player> = null
-    private numPlayers: int
+    /*
+    private Deque openDeque = null;
+    private Deque  garbageDeque  = null;
+    private CyclicLinkedList<Player> players = null;
+    private int numPlayers;
+
+     */
 
 
     public static void main(String[] args) {
 
-        Scanner scanner = new Scanner();
-        Random random;
+        Scanner scanner = new Scanner(System.in);
 
+        Random random = new Random();
+
+        System.out.println("게임을 시작 하시겠습니다");
         while(true) {
+
+            System.out.println("게임을 시작 하시겠습니다");
             numPlayers = intput....
 
             startGameInit(numPlayers);
