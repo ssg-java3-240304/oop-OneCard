@@ -1,6 +1,6 @@
 package com.sh;
 
-import com.sh.card.Card;
+import com.sh.objectType.card.Card;
 
 import java.util.Scanner;
 

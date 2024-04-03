@@ -1,4 +1,4 @@
-package com.sh.card;
+package com.sh.objectType.card;
 
 public class Card {
     private int number;
