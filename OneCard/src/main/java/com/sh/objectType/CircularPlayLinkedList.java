@@ -3,11 +3,10 @@ package com.sh.objectType;
 public class CircularPlayLinkedList<Player> {
     private Node<Player> head; // 노드의 첫 부분을 가리키는 레퍼런스
     private Node<Player> tail; // 노드의 끝 부분을 가리키는 레퍼런스
-
     private int size; // 리스트 요소 갯수
 
     // 생성자
-    public CircularPlayLinkedList() {
+    public CircularPlayLinkedList<Player>() {
         this.head = null;
         this.tail = null;
         this.size = 0;
@@ -26,6 +25,7 @@ public class CircularPlayLinkedList<Player> {
             this.prev = prev;
         }
     }
+
     public void addFirst(Player value) {
 
         // 1. head와 tail을 임시 백업함
@@ -56,6 +56,9 @@ public class CircularPlayLinkedList<Player> {
             last.next = new_node; // 마지막 노드의 next를 추가 노드를 바라보도록 참조
             new_node.prev = last; // 추가 노드(첫번째)의 prev를 마지막 노드를 바라보도록 참조
         }
+    }
+    public int getSize(){
+        return size;
     }
     public void addLast(Player value) {
 
@@ -88,10 +91,12 @@ public class CircularPlayLinkedList<Player> {
             first.prev = new_node; // 첫번째 노드의 prev를 추가 노드를 바라보도록 참조
         }
     }
+
     public boolean add(Player player) {
         addLast(player);
         return true;
     }
+
    public Player remove() {
 
         // 1. 만약 삭제할 요소가 아무것도 없으면 에러
@@ -123,31 +128,34 @@ public class CircularPlayLinkedList<Player> {
         // 8. 마지막으로 삭제된 요소를 반환
         return returnValue;
     }
-    public Node<Player> rotation() {
-        // 리스트가 비어 있거나 단일 노드만 있는 경우 회전의 필요가 없으므로 바로 반환
-        if (head == null || head.next == head) {
-            return head;
-        }
 
-        // head를 다음 노드로 이동시키고 tail도 업데이트
+
+    public void moveBack(){
+        head = head.prev;
+        tail = tail.prev;
+    }
+
+    public void moveFront(){
         tail = head;
         head = head.next;
-
-        // 새로운 head 반환
-        return head;
     }
-    public Node<Player> getCurrentPlayer(){
+
+    public void rotation() {
+        // head를 다음 노드로 이동시키고 tail도 업데이트
+
+    }
+    public Player getfirstPlayer(){
         if (head == null || head.next == head) {
-            return head;
+            return head.player;
         }
-        return head;
+        return head.player;
     }
 }
 
 
 //        CircularPlayLinkedList<Player> 사용 예제 코드
 //
-//        CircularPlayLinkedList<Player> playerList = new CircularPlayLinkedList();
+//        CircularPlayLinkedList<Player> playerList = new CircularPlayLinkedList<Player>();
 //        Player p0 = new Player();
 //        playerList.add(p0);
 //        Player p1 = new Player();
