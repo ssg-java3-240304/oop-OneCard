@@ -6,7 +6,7 @@ public class CircularPlayLinkedList<Player> {
     private int size; // 리스트 요소 갯수
 
     // 생성자
-    public CircularPlayLinkedList<Player>() {
+    public CircularPlayLinkedList() {
         this.head = null;
         this.tail = null;
         this.size = 0;
