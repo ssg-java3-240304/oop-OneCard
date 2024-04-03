@@ -8,7 +8,7 @@ public class Main {
     /*
     private Deque openDeque = null;
     private Deque  garbageDeque  = null;
-    private CyclicLinkedList<Player> players = null;
+    private CyclicPlayerLinkedList<Player> players = null;
     private int numPlayers;
 
      */
@@ -20,10 +20,12 @@ public class Main {
 
         Random random = new Random();
 
-        System.out.println("게임을 시작 하시겠습니다");
+        System.out.println("게임을 시작 하시겠습니까");
+
+
         while(true) {
 
-            System.out.println("게임을 시작 하시겠습니다");
+
             numPlayers = intput....
 
             startGameInit(numPlayers);
@@ -34,10 +36,14 @@ public class Main {
             //오픈 덱에서 카드 한장 공개
             openCard();
             // Game start
-            while() {
+            while(true) {
+
+                Player currPlayer = Players
 
                 while() {
                     // 해당 순서 플레이어 카드덱 프린트
+
+                    player
 
 
                     // 한장이라도 냈는지 안냈는지
