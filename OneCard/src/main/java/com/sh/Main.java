@@ -1,109 +1,165 @@
 package com.sh;
 
-
-import com.sh.objectType.CircularPlayLinkedList;
-import com.sh.objectType.card.Card;
-import com.sh.objectType.card.Deck;
-import com.sh.objectType.Player;
-
+import java.util.LinkedList;
+import java.util.Objects;
+import java.util.Random;
 import java.util.Scanner;
+
+
+import com.sh.component.DeckControlManager;
+import com.sh.component.PlayerOrderManager;
+import com.sh.exception.GameOver;
+import com.sh.objectType.Player;
+import com.sh.objectType.card.Card;
 
 public class Main {
 
 
-    public static final int TOTAL_CARDS = 52;
-
-
-    private openDeque: Deck = null
-    private garbageDeque: Deck = null
-    public static CircularPlayLinkedList<Player> playerList = null;
-    private numPlayers: int
-
-
     public static void main(String[] args) {
 
-        Scanner scanner = new Scanner();
-        Random random;
+        Scanner scanner = new Scanner(System.in);
 
+        PlayerOrderManager playerOrderManager = PlayerOrderManager.getInstance();
+
+        DeckControlManager deckControlManager = DeckControlManager.getInstance();
+
+        String response = null;
         while(true) {
-            numPlayers = intput....
 
-            startGameInit(numPlayers);
+            System.out.println("게임을 시작 하시겠습니까");
+
+            response = Main.inputYesOrNo(scanner);
+
+            if (response == "N" || response == "no") {
+                System.out.println("프로그램을 종료합니다");
+                break;
+            }
+
+            System.out.println("플레이어 수를 입력해주세요");
+
+            int numPlayers = 0;
+
+            while(scanner.hasNext()) {
+                System.out.print("2 - 5명");
+
+                numPlayers = scanner.nextInt();
+
+                if (!(numPlayers >= 2 && numPlayers <= 5)) {
+                    System.err.println("잘못된 입력 입니다.");
+
+                } else {
+                    break;
+                }
+            }
+
+            playerOrderManager.initPlayers(numPlayers);
+
+            for(int i = 0; i < numPlayers; ++i) {
+                Player currPlayer = playerOrderManager.getCurrentPlayer();
+                for(int t = 0; t < 7; ++t) {
+                    currPlayer.insertCard(deckControlManager.popTopOpenDeck());
+                }
+            }
 
 
             //순서 정하기
-            playerOrdering();
+            playerOrderManager.decidePlayerOrder();
             //오픈 덱에서 카드 한장 공개
-            openCard();
-            // Game start
-            while() {
+            Card topCard = deckControlManager.drawCard();
 
-                while() {
-                    // 해당 순서 플레이어 카드덱 프린트
+            try {
+
+                // Game start
+                while (true) {
+
+                    Player currPlayer = playerOrderManager.getCurrentPlayer();
+
+                    while (true) {
+                        // 해당 순서 플레이어 카드덱 프린트
+                        currPlayer.printDeck();
+
+                        // 한장이라도 냈는지 안냈는지
+                        boolean flag = false;
 
 
-                    // 한장이라도 냈는지 안냈는지
-                    boolean flag = false
-                    // 선수로 부터 입력값 받기 (낼지 말지)
-                    input;
-                    if (input == false) {
-                        if(flag == false) {
-                            insertCard(card);
+                        // 선수로 부터 입력값 받기 (낼지 말지)
+                        System.out.println("카드를 제출 하시겠습니까?");
+
+
+                        response = inputYesOrNo(response);
+
+                        if (response == "N" || response == "no") {
+                            if (!flag) {
+                                Card tempCard = deckControlManager.popTopOpenDeck();
+                                currPlayer.insertCard(tempCard);
+                            }
+                            break;
                         }
 
-                        break;
+                        while (true) {
 
-                    }
+                            // 카드 인데스 인풋 받기
+                            System.out.println("카드를 선택해 주세요.");
 
-                    // 카드 인데스 인풋 받기
+                            int cardIndex = scanner.nextInt();
 
-                    Card recievedCard = sendCard();
-                    // 카드 검사
-                    valid = isValid(recievedCard);
-                    if valid == true
-                        removeCard(i);
+                            Card recievedCard = currPlayer.getCard(cardIndex);
 
-                        garbage.insertCard(card);
+                            // 카드 검사
+                            boolean valid = recievedCard.compare(topCard);
 
-                        // j, k, q 효과카드 처리
+                            if (valid) {
+                                currPlayer.removeCard(cardIndex);
+
+                                deckControlManager.addCardGarbage(recievedCard);
+
+                                topCard = recievedCard;
+
+                                // j, k, q 효과카드 처리
+
+                                flag = true;
+
+                                // 현재 플레이어가 이겼다라는 예외처리경우 게임이 종료
+                                currPlayer.checkWin();
+
+                            } else {
+                                System.err.println("잘못된 입력 입니다.");
+                            }
+                        }
+
+                    } // turn loop
+
+                    // 다음 차례 플레이어
+                    playerOrderManager.nextTurnChange();
 
 
-                        flag = true;
-
-                    eles {
-                        print("wrong card!!!")
-                    }
-
-                } // turn loop
-
-                // 플레이어 카드 수 확인 (한명이라도 카드가 0 장이면 게임 끝)
-
-                //
-                rotation();
+                } // game loop
+            } catch (GameOver over) {
+                System.out.println(over.getMessage() + "플레이어가 승리하였습니다.");
 
 
-            } // game loop
-
-            regame()?
-
-
+            }
 
 
         } // main loop
+
+
+    } // main method
+
+    public static String inputYesOrNo(Scanner scanner){
+        while(true) {
+            System.out.print("Y/N, yes/no");
+
+            String response = scanner.next();
+
+            switch (response) {
+                case "N", "no", "Y", "yes" -> {
+                    return response;
+                }
+                default -> System.err.println("잘못된 입력 입니다.");
+            }
+        }
     }
 
-    void startGameInit() {
-        openDequeInit();
 
-        playerInit(numPlayers);
-
-    }
-
-    void palyerInit(int numPlayers) {
-        // numPlayers 의 플레이어 생성
-        createPlayers();
-        // 각 자에게 카드 분배
-        cardSeperation();
-
-    }
 }
