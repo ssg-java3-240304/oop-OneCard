@@ -16,7 +16,7 @@ public class Main {
 
     private openDeque: Deck = null
     private garbageDeque: Deck = null
-    public static CircularPlayLinkedList<Player> playerList = null;
+
     private numPlayers: int
 
 
