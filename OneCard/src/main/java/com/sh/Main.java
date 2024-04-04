@@ -1,14 +1,22 @@
 package com.sh;
 
+
+import com.sh.objectType.CircularPlayLinkedList;
 import com.sh.objectType.card.Card;
+import com.sh.objectType.card.Deck;
+import com.sh.objectType.Player;
 
 import java.util.Scanner;
 
 public class Main {
 
-    private openDeque: Deque = null
-    private garbageDeque: Deque = null
-    private players: CyclicLinkedList<Player> = null
+
+    public static final int TOTAL_CARDS = 52;
+
+
+    private openDeque: Deck = null
+    private garbageDeque: Deck = null
+    public static CircularPlayLinkedList<Player> playerList = null;
     private numPlayers: int
 
 

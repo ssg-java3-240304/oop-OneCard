@@ -1,5 +1,6 @@
 package com.sh.objectType.card;
 
+
 public abstract class Card {
     private int number;
 
@@ -25,4 +26,5 @@ public abstract class Card {
             System.out.println("낼 수 없는 카드입니다. 다른 카드를 골라주세요!");
         }
     }
+
 }

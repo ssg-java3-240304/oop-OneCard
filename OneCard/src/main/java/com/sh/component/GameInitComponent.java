@@ -1,10 +1,11 @@
 package com.sh.component;
 
+import com.sh.objectType.card.Card;
+
 import java.util.Deque;
-import java.util.List;
 import java.util.Scanner;
 
-public class GameInitSystem {
+public class GameInitComponent {
     public Deque<Card> init(Deque<Card> dealerDeck){
         //카드 생성 노가다 코드? 1 ~ 54까지 셔플 된 덱으로 만들기
         return dealerDeck;
@@ -19,6 +20,7 @@ public class GameInitSystem {
 //        return 
 //    }
 
+    //
 
 
 }
