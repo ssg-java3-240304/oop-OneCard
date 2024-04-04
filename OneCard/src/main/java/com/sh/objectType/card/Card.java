@@ -20,11 +20,11 @@ public abstract class Card {
     }
 
     public boolean compare(Card card) {
-        if(card.number == this.number || this.equals(card)){
-            System.out.println("낼 수 있습니다.");
+        if(card.number == this.number || this.getClass() == card.getClass()){
+            //System.out.println("낼 수 있습니다.");
             return true;
         }else {
-            System.out.println("낼 수 없는 카드입니다. 다른 카드를 골라주세요!");
+            //System.out.println("낼 수 없는 카드입니다. 다른 카드를 골라주세요!");
             return false;
         }
     }

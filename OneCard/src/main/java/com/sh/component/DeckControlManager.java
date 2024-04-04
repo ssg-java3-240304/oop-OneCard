@@ -33,6 +33,7 @@ public class DeckControlManager {
                     -> openDeck.addCard(CardFactory.createCard(kind, i))
             );
         }
+        deckShuffle();
 
     }
 

@@ -14,6 +14,8 @@ import com.sh.objectType.card.Card;
 
 public class Main {
 
+    public static int cardNums = 1;
+
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
@@ -30,7 +32,7 @@ public class Main {
 
             response = Main.inputYesOrNo(scanner);
 
-            if (response == "N" || response == "no") {
+            if (response.equals("N") || response.equals("no"))  {
                 System.out.println("프로그램을 종료합니다");
                 break;
             }
@@ -56,7 +58,7 @@ public class Main {
 
             for(int i = 0; i < numPlayers; ++i) {
                 Player currPlayer = playerOrderManager.getCurrentPlayer();
-                for(int t = 0; t < 7; ++t) {
+                for(int t = 0; t < cardNums; ++t) {
                     currPlayer.insertCard(deckControlManager.popTopOpenDeck());
                 }
                 playerOrderManager.nextTurnChange();
@@ -75,12 +77,14 @@ public class Main {
 
                     Player currPlayer = playerOrderManager.getCurrentPlayer();
 
+                    // 한장이라도 냈는지 안냈는지
+                    boolean flag = false;
+
                     while (true) {
+                        System.out.println((currPlayer.getId() + 1) + " 번째 플레이어 입니다");
+
                         // 해당 순서 플레이어 카드덱 프린트
                         currPlayer.printDeck();
-
-                        // 한장이라도 냈는지 안냈는지
-                        boolean flag = false;
 
                         //맨 위 카드 보여주기
                         System.out.println(topCard);
@@ -91,11 +95,14 @@ public class Main {
 
                         response = inputYesOrNo(scanner);
 
-                        if (response == "N" || response == "no") {
+                        if (response.equals("N") || response.equals("no")) {
                             if (!flag) {
                                 Card tempCard = deckControlManager.popTopOpenDeck();
                                 currPlayer.insertCard(tempCard);
+                                System.out.println("카드 한장을 가져갑니다.");
+                                currPlayer.printDeck();
                             }
+                            System.out.println("NO");
                             break;
                         }
 
@@ -103,8 +110,11 @@ public class Main {
 
                             // 카드 인데스 인풋 받기
                             System.out.println("카드를 선택해 주세요.");
+                            System.out.println("1 부터 " + currPlayer.getCardDeck().length + "사이에서 고르세요");
 
                             int cardIndex = scanner.nextInt();
+
+                            cardIndex -= 1;
 
                             Card recievedCard = currPlayer.getCard(cardIndex);
 
@@ -121,21 +131,31 @@ public class Main {
                                 // j, q, k 효과카드 처리 11 12 13
                                 if (topCard.getNumber() == 11) {
                                     playerOrderManager.useJCard();
+                                    System.out.println("J 카드가 발동됩니다 플레이어 한명 건너뜁니다");
+                                    break;
 
                                 } else if (topCard.getNumber() == 12) {
                                     playerOrderManager.useQCard();
+                                    System.out.println("Q 카드가 발동됩니다 순서가 반대로 바뀝니다");
+                                    break;
 
                                 } else if(topCard.getNumber() == 13) {
                                     playerOrderManager.useKCard();
+                                    System.out.println("K 카드가 발동됩니다 한번더 제출 가능합니다.");
+                                    break;
                                 }
+                                System.out.println(recievedCard);
 
                                 flag = true;
 
                                 // 현재 플레이어가 이겼다라는 예외처리경우 게임이 종료
                                 currPlayer.checkWin();
 
+                                break;
+
                             } else {
-                                System.err.println("잘못된 입력 입니다.");
+                                System.out.println("잘못된 카드 입니다.");
+                                break;
                             }
                         }
 
