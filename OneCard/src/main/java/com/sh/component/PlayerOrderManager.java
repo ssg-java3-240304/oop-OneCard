@@ -1,6 +1,5 @@
 package com.sh.component;
 
-import com.sh.objectType.CircularPlayLinkedList;
 import com.sh.objectType.Player;
 
 import java.util.Random;
@@ -8,19 +7,19 @@ import java.util.Random;
 import static com.sh.Main.playerList;
 
 //싱글톤 컴포넌트
-public class PlayerOrderManagerComponent {
-    private static PlayerOrderManagerComponent instance;
+public class PlayerOrderManager {
+    private static PlayerOrderManager instance;
     private boolean direction_flag = true;
     // 생성자를 private로 선언하여 외부에서의 직접적인 인스턴스화를 방지
-    private PlayerOrderManagerComponent() {
+    private PlayerOrderManager() {
 
     }
 
     // 인스턴스에 대한 전역 접근 지점을 제공
-    public static PlayerOrderManagerComponent getInstance() {
+    public static PlayerOrderManager getInstance() {
         if (instance == null) {
             // 인스턴스가 null일 경우에만 인스턴스 생성
-            instance = new PlayerOrderManagerComponent();
+            instance = new PlayerOrderManager();
         }
         return instance;
     }
@@ -38,9 +37,9 @@ public class PlayerOrderManagerComponent {
     }
     //순서 다음 유저에게 넘기기
     public void nextTurnChange(){
-        if(direction_flag)
+        if(direction_flag) {
             playerList.moveFront();
-        else if(!direction_flag)
+        } else
             playerList.moveBack();
     }
 
@@ -51,8 +50,8 @@ public class PlayerOrderManagerComponent {
 
     //Q카드 사용 메서드
     public void useJCard(){
-        playerList.rotation();
-        playerList.rotation();
+        nextTurnChange();
+        nextTurnChange();
     }
 
     //순서 역순으로 변경  ... Q카드 사용 메서드
