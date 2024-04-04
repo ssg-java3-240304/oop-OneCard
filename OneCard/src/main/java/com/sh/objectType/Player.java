@@ -31,8 +31,7 @@ public class Player {
     public Player() {
     }
 
-    public Player(CardDeck cardDeck, int id) {
-        this.cardDeck = cardDeck;
+    public Player(int id) {
         this.id = id;
     }
 
