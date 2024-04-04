@@ -8,22 +8,34 @@ import java.util.Random;
 import static com.sh.Main.playerList;
 
 //싱글톤 컴포넌트
-public class PlayerOrderManagerComponent {
-    private static PlayerOrderManagerComponent instance;
+public class PlayerOrderManager {
+    private static PlayerOrderManager instance;
     private boolean direction_flag = true;
+    private CircularPlayLinkedList<Player> playerList;
+
+
     // 생성자를 private로 선언하여 외부에서의 직접적인 인스턴스화를 방지
-    private PlayerOrderManagerComponent() {
+    private PlayerOrderManager() {
 
     }
 
     // 인스턴스에 대한 전역 접근 지점을 제공
-    public static PlayerOrderManagerComponent getInstance() {
+    public static PlayerOrderManager getInstance() {
         if (instance == null) {
             // 인스턴스가 null일 경우에만 인스턴스 생성
-            instance = new PlayerOrderManagerComponent();
+            instance = new PlayerOrderManager();
         }
         return instance;
     }
+
+    public void initPlayer(int n){
+        //아이디 부여
+        for(int i = 0; i < n; ++i){
+            Player p = new Player(i);
+            playerList.add(p);
+        }
+    }
+
     //메인으로 갈것
 //    public boolean playerAdd(Player player) {
 //        playerList.add(player);
@@ -40,7 +52,7 @@ public class PlayerOrderManagerComponent {
     public void nextTurnChange(){
         if(direction_flag)
             playerList.moveFront();
-        else if(!direction_flag)
+        else
             playerList.moveBack();
     }
 

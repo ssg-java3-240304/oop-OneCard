@@ -40,7 +40,6 @@ public class CircularPlayLinkedList<Player> {
 
         // 4. 첫번째 기준이 변경되었으니 head를 삽입된 새 노드로 참조하도록 업데이트
         head = new_node;
-
         if (first == null) {
             // 5. 만일 빈 리스트에서 최초의 요소 추가였을 경우,
             tail = new_node; // tail도 첫째 노드를 바라보도록 업데이트
