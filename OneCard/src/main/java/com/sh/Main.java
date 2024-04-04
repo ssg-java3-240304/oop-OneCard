@@ -115,7 +115,10 @@ public class Main {
 
                                 topCard = recievedCard;
 
-                                // j, k, q 효과카드 처리
+                                // j, q, k 효과카드 처리 11 12 13
+                                if (topCard.getNumber() == 11) {
+
+                                } else if top
 
                                 flag = true;
 
@@ -136,6 +139,7 @@ public class Main {
                 } // game loop
             } catch (GameOver over) {
                 System.out.println(over.getMessage() + "플레이어가 승리하였습니다.");
+                deckControlManager.m
 
 
             }
