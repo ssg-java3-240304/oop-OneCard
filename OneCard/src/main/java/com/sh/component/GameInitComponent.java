@@ -1,7 +1,5 @@
 package com.sh.component;
 
-import com.sh.objectType.card.Card;
-
 import java.util.Deque;
 import java.util.Scanner;
 
