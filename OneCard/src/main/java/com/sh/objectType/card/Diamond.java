@@ -1,6 +1,8 @@
 package com.sh.objectType.card;
 
-public class Diamond extends Card{
+
+public class Diamond extends Card {
+
     public Diamond() {
     }
 
