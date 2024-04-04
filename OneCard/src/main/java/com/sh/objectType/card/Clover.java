@@ -13,4 +13,5 @@ public class Clover extends Card{
         return "Clover " + this.getNumber() +
                 "입니다.";
     }
+
 }

@@ -1,6 +1,8 @@
 package com.sh.objectType.card;
 
+
 public class Heart extends Card {
+
     public Heart() {
     }
 

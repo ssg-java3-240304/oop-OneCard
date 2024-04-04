@@ -1,6 +1,7 @@
 package com.sh.objectType.card;
 
 public class Spade extends Card {
+
     public Spade() {
     }
 
