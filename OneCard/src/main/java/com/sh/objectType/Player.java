@@ -1,7 +1,9 @@
 package com.sh.objectType;
 
-import com.sh.card.Card;
 
+import com.sh.CardDeck;
+import com.sh.exception.GameOver;
+import com.sh.objectType.card.Card;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,6 +34,7 @@ public class Player {
     }
 
     public Player(int id) {
+        cardDeck = new CardDeck();
         this.id = id;
     }
 
@@ -44,22 +47,30 @@ public class Player {
         cardDeck.addCard(card);
     }
 
-    public Card removeCard(int index) {
+    public Card removeCard(int index) throws Exception {
         Card pickCard = cardDeck.getCard(index);
-        return cardDeck.removeCard(pickCard);
+
+        if(!cardDeck.removeCard(pickCard)) {
+            throw new Exception("잘못된 인덱스");
+        }
+        return pickCard;
     }
 
     public void alarmOneCard() {
-        if (cardDeck.size() == 1) {
+        if (cardDeck.getLength() == 1) {
             System.out.println("🃏 원카드!");
         }
     }
 
-    public void checkWin() {
-        if (cardDeck.size() == 0) {
+    public void checkWin() throws GameOver {
+        if (cardDeck.getLength() == 0) {
             System.out.println("🎊 승리하셨습니다!!! 🎊");
             throw new GameOver();
         }
+    }
+
+    public void printDeck() {
+        this.cardDeck.printDeque();
     }
 
 

@@ -5,7 +5,6 @@ import com.sh.objectType.Player;
 
 import java.util.Random;
 
-import static com.sh.Main.playerList;
 
 //싱글톤 컴포넌트
 public class PlayerOrderManager {
@@ -28,7 +27,8 @@ public class PlayerOrderManager {
         return instance;
     }
 
-    public void initPlayer(int n){
+    public void initPlayers(int n){
+        playerList = new CircularPlayLinkedList<>();
         //아이디 부여
         for(int i = 0; i < n; ++i){
             Player p = new Player(i);
