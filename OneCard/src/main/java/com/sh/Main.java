@@ -22,6 +22,7 @@ public class Main {
 
         DeckControlManager deckControlManager = DeckControlManager.getInstance();
 
+        deckControlManager.deckInit();
         String response = null;
         while(true) {
 
@@ -35,11 +36,11 @@ public class Main {
             }
 
             System.out.println("플레이어 수를 입력해주세요");
+            System.out.print("2 - 5명");
 
             int numPlayers = 0;
 
             while(scanner.hasNext()) {
-                System.out.print("2 - 5명");
 
                 numPlayers = scanner.nextInt();
 
@@ -58,6 +59,7 @@ public class Main {
                 for(int t = 0; t < 7; ++t) {
                     currPlayer.insertCard(deckControlManager.popTopOpenDeck());
                 }
+                playerOrderManager.nextTurnChange();
             }
 
 
@@ -80,12 +82,14 @@ public class Main {
                         // 한장이라도 냈는지 안냈는지
                         boolean flag = false;
 
+                        //맨 위 카드 보여주기
+                        System.out.println(topCard);
 
                         // 선수로 부터 입력값 받기 (낼지 말지)
                         System.out.println("카드를 제출 하시겠습니까?");
 
 
-                        response = inputYesOrNo(response);
+                        response = inputYesOrNo(scanner);
 
                         if (response == "N" || response == "no") {
                             if (!flag) {
@@ -146,6 +150,8 @@ public class Main {
                 System.out.println(over.getMessage() + "플레이어가 승리하였습니다.");
                 break;
 
+            } catch (Exception e) {
+                throw new RuntimeException(e);
             }
 
 

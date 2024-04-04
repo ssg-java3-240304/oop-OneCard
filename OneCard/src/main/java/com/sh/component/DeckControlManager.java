@@ -1,7 +1,9 @@
 package com.sh.component;
 
+import com.sh.CardDeck;
 import com.sh.objectType.card.Card;
 
+import java.util.List;
 import java.util.stream.IntStream;
 
 public class DeckControlManager {
@@ -22,6 +24,8 @@ public class DeckControlManager {
     }
 
     public void deckInit() {
+        openDeck = new CardDeck();
+        garbageDeck = new CardDeck();
 
         for(CardFactory.CardKind kind: CardFactory.CardKind.values()) {
 
@@ -33,7 +37,7 @@ public class DeckControlManager {
     }
 
     public void deckShuffle() {
-        openDeck.suffle();
+        openDeck.shuffle();
     }
 
     public Card drawCard() {
@@ -55,6 +59,7 @@ public class DeckControlManager {
 
     public void addCardGarbage(Card card) {
         garbageDeck.addCard(card);
+
     }
 
 }

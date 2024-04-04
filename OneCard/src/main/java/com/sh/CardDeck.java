@@ -18,15 +18,20 @@ public class CardDeck {
 
     public void addCard(Card card) {
         cardDeck.add(card);
+        length += 1;
     }
     public Card removeCard(int index) {
+        length -= 1;
         return cardDeck.remove(index);
+    }
+    public boolean removeCard(Card card) {
+        return cardDeck.remove(card);
     }
     public Card getCard(int index) {
         return cardDeck.get(index);
     }
-    public List<Card> mergeDeck(List<Card> cardDeck) {
-        this.cardDeck.addAll(cardDeck);
+    public List<Card> mergeDeck(CardDeck cardDeck) {
+        this.cardDeck.addAll(cardDeck.getCardDeck());
         this.shuffle();
         return this.cardDeck;
     }
