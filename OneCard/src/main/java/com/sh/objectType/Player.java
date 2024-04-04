@@ -6,14 +6,33 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Player {
+    // 필드
     private CardDeck cardDeck;
+    private int id;
+
+    // getter/setter
+    public CardDeck getCardDeck() {
+        return cardDeck;
+    }
+
+    public void setCardDeck(CardDeck cardDeck) {
+        this.cardDeck = cardDeck;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     // 생성자
     public Player() {
     }
 
-    public Player(CardDeck cardDeck) {
-        this.cardDeck = cardDeck;
+    public Player(int id) {
+        this.id = id;
     }
 
     // 메소드
@@ -32,16 +51,15 @@ public class Player {
 
     public void alarmOneCard() {
         if (cardDeck.size() == 1) {
-            System.out.println("원카드!");
+            System.out.println("🃏 원카드!");
         }
     }
 
-    public boolean checkWin() {
+    public void checkWin() {
         if (cardDeck.size() == 0) {
-            System.out.println("승리하셨습니다!");
-            return true;
+            System.out.println("🎊 승리하셨습니다!!! 🎊");
+            throw new GameOver();
         }
-        return false;
     }
 
 

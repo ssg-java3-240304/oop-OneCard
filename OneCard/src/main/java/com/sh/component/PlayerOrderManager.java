@@ -1,5 +1,6 @@
 package com.sh.component;
 
+import com.sh.objectType.CircularPlayLinkedList;
 import com.sh.objectType.Player;
 
 import java.util.Random;
@@ -10,6 +11,9 @@ import static com.sh.Main.playerList;
 public class PlayerOrderManager {
     private static PlayerOrderManager instance;
     private boolean direction_flag = true;
+    private CircularPlayLinkedList<Player> playerList;
+
+
     // 생성자를 private로 선언하여 외부에서의 직접적인 인스턴스화를 방지
     private PlayerOrderManager() {
 
@@ -23,6 +27,15 @@ public class PlayerOrderManager {
         }
         return instance;
     }
+
+    public void initPlayer(int n){
+        //아이디 부여
+        for(int i = 0; i < n; ++i){
+            Player p = new Player(i);
+            playerList.add(p);
+        }
+    }
+
     //메인으로 갈것
 //    public boolean playerAdd(Player player) {
 //        playerList.add(player);
@@ -37,9 +50,9 @@ public class PlayerOrderManager {
     }
     //순서 다음 유저에게 넘기기
     public void nextTurnChange(){
-        if(direction_flag) {
+        if(direction_flag)
             playerList.moveFront();
-        } else
+        else
             playerList.moveBack();
     }
 
@@ -50,8 +63,8 @@ public class PlayerOrderManager {
 
     //Q카드 사용 메서드
     public void useJCard(){
-        nextTurnChange();
-        nextTurnChange();
+        playerList.rotation();
+        playerList.rotation();
     }
 
     //순서 역순으로 변경  ... Q카드 사용 메서드
