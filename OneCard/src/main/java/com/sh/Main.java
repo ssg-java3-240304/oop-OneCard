@@ -14,7 +14,6 @@ import com.sh.objectType.card.Card;
 
 public class Main {
 
-
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
@@ -117,8 +116,14 @@ public class Main {
 
                                 // j, q, k 효과카드 처리 11 12 13
                                 if (topCard.getNumber() == 11) {
+                                    playerOrderManager.useJCard();
 
-                                } else if top
+                                } else if (topCard.getNumber() == 12) {
+                                    playerOrderManager.useQCard();
+
+                                } else if(topCard.getNumber() == 13) {
+                                    playerOrderManager.useKCard();
+                                }
 
                                 flag = true;
 
@@ -139,8 +144,7 @@ public class Main {
                 } // game loop
             } catch (GameOver over) {
                 System.out.println(over.getMessage() + "플레이어가 승리하였습니다.");
-                deckControlManager.m
-
+                break;
 
             }
 
