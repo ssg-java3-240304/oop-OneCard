@@ -10,7 +10,6 @@ public class Spade extends Card{
 
     @Override
     public String toString() {
-        return "Spade " + this.getNumber() +
-                "입니다.";
+        return "Spade♠️ " + this.getNumber();
     }
 }
