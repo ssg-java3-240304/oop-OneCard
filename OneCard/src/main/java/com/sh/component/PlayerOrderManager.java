@@ -64,7 +64,6 @@ public class PlayerOrderManager {
     //Q카드 사용 메서드
     public void useJCard(){
         playerList.rotation();
-        playerList.rotation();
     }
 
     //순서 역순으로 변경  ... Q카드 사용 메서드
