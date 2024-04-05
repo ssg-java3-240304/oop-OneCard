@@ -10,7 +10,6 @@ public class Heart extends Card{
 
     @Override
     public String toString() {
-        return "Heart " + this.getNumber() +
-                "입니다.";
+        return "Heart♥️ " + this.getNumber();
     }
 }

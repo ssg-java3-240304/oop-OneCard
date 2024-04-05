@@ -28,9 +28,10 @@ public class Main {
         String response = null;
         while(true) {
 
-            System.out.println("게임을 시작 하시겠습니까");
+            System.out.println("게임을 시작 하시겠습니까?");
 
             response = Main.inputYesOrNo(scanner);
+
 
             if (response.equals("N") || response.equals("no"))  {
                 System.out.println("프로그램을 종료합니다");
@@ -38,7 +39,7 @@ public class Main {
             }
 
             System.out.println("플레이어 수를 입력해주세요");
-            System.out.print("2 - 5명");
+            System.out.print("2 - 5명 : ");
 
             int numPlayers = 0;
 
@@ -109,6 +110,7 @@ public class Main {
                         while (true) {
 
                             // 카드 인데스 인풋 받기
+
                             System.out.println("카드를 선택해 주세요.");
                             System.out.println("1 부터 " + currPlayer.getCardDeck().length + "사이에서 고르세요");
 
@@ -182,7 +184,7 @@ public class Main {
 
     public static String inputYesOrNo(Scanner scanner){
         while(true) {
-            System.out.print("Y/N, yes/no");
+            System.out.print("Y/N, yes/no : ");
 
             String response = scanner.next();
 

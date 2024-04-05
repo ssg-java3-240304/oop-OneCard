@@ -10,8 +10,7 @@ public class Clover extends Card{
 
     @Override
     public String toString() {
-        return "Clover " + this.getNumber() +
-                "입니다.";
+        return "Clover♣️ " + this.getNumber();
     }
 
 }

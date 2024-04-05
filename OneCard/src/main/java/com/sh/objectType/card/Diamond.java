@@ -10,8 +10,7 @@ public class Diamond extends Card{
 
     @Override
     public String toString() {
-        return "Diamond " + this.getNumber() +
-                "입니다.";
+        return "Diamond♦️ " + this.getNumber();
     }
 }
 
