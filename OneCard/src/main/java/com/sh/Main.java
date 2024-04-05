@@ -163,9 +163,9 @@ public class Main {
                                     // 낼 수 없는 카드
                                     throw new IndexOutOfBoundsException();
                                 }
-                                } catch (IndexOutOfBoundsException | InputMismatchException ex) {
-                                    System.out.println("잘못된 선택 입니다.");
-                                    break;
+                            } catch (IndexOutOfBoundsException | InputMismatchException ex) {
+                                System.out.println("잘못된 선택 입니다.");
+                                break;
                             } // try
 
                         }
