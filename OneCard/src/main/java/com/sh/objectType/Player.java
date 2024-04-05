@@ -65,7 +65,7 @@ public class Player {
     public void checkWin() throws GameOver {
         if (cardDeck.getLength() == 0) {
             System.out.println("🎊 승리하셨습니다!!! 🎊");
-            throw new GameOver();
+            throw new GameOver(String.valueOf(this.id));
         }
     }
 

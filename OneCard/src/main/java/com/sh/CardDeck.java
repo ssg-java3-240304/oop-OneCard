@@ -25,6 +25,7 @@ public class CardDeck {
         return cardDeck.remove(index);
     }
     public boolean removeCard(Card card) {
+        length -= 1;
         return cardDeck.remove(card);
     }
     public Card getCard(int index) {
