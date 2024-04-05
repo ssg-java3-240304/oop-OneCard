@@ -60,7 +60,9 @@ public class Main {
             for(int i = 0; i < numPlayers; ++i) {
                 Player currPlayer = playerOrderManager.getCurrentPlayer();
                 for(int t = 0; t < cardNums; ++t) {
-                    currPlayer.insertCard(deckControlManager.popTopOpenDeck());
+                    Card card = deckControlManager.popTopOpenDeck();
+                    if(card != null)
+                        currPlayer.insertCard(card);
                 }
                 playerOrderManager.nextTurnChange();
             }
@@ -70,7 +72,6 @@ public class Main {
             playerOrderManager.decidePlayerOrder();
             //오픈 덱에서 카드 한장 공개
             Card topCard = deckControlManager.drawCard();
-
             try {
 
                 // Game start
@@ -98,68 +99,73 @@ public class Main {
 
                         if (response.equals("N") || response.equals("no")) {
                             if (!flag) {
-                                Card tempCard = deckControlManager.popTopOpenDeck();
-                                currPlayer.insertCard(tempCard);
-                                System.out.println("카드 한장을 가져갑니다.");
+                                Card card = deckControlManager.popTopOpenDeck();
+                                if(card != null) {
+                                    currPlayer.insertCard(card);
+                                    System.out.println("카드 한장을 가져갑니다.");
+                                }
+
                                 currPlayer.printDeck();
                             }
                             System.out.println("NO");
                             break;
                         }
+                        else {
+                            while (true) {
 
-                        while (true) {
+                                // 카드 인데스 인풋 받기
 
-                            // 카드 인데스 인풋 받기
+                                System.out.println("카드를 선택해 주세요.");
+                                System.out.println("1 부터 " + currPlayer.getCardDeck().getLength() + "사이에서 고르세요");
 
-                            System.out.println("카드를 선택해 주세요.");
-                            System.out.println("1 부터 " + currPlayer.getCardDeck().length + "사이에서 고르세요");
+                                int cardIndex = scanner.nextInt();
 
-                            int cardIndex = scanner.nextInt();
+                                cardIndex -= 1;
 
-                            cardIndex -= 1;
+                                Card recievedCard = currPlayer.getCard(cardIndex);
 
-                            Card recievedCard = currPlayer.getCard(cardIndex);
+                                // 카드 검사
+                                boolean valid = recievedCard.compare(topCard);
 
-                            // 카드 검사
-                            boolean valid = recievedCard.compare(topCard);
+                                if (valid) {
+                                    currPlayer.removeCard(cardIndex);
 
-                            if (valid) {
-                                currPlayer.removeCard(cardIndex);
+                                    deckControlManager.addCardGarbage(recievedCard);
 
-                                deckControlManager.addCardGarbage(recievedCard);
+                                    topCard = recievedCard;
 
-                                topCard = recievedCard;
+                                    // j, q, k 효과카드 처리 11 12 13
+                                    if (topCard.getNumber() == 11) {
+                                        playerOrderManager.useJCard();
+                                        System.out.println("J 카드가 발동됩니다 플레이어 한명 건너뜁니다");
+                                        break;
 
-                                // j, q, k 효과카드 처리 11 12 13
-                                if (topCard.getNumber() == 11) {
-                                    playerOrderManager.useJCard();
-                                    System.out.println("J 카드가 발동됩니다 플레이어 한명 건너뜁니다");
+                                    } else if (topCard.getNumber() == 12) {
+                                        playerOrderManager.useQCard();
+                                        System.out.println("Q 카드가 발동됩니다 순서가 반대로 바뀝니다");
+                                        break;
+
+                                    } else if (topCard.getNumber() == 13) {
+                                        playerOrderManager.useKCard();
+                                        System.out.println("K 카드가 발동됩니다 한번더 제출 가능합니다.");
+                                        break;
+                                    }
+                                    System.out.println(recievedCard);
+
+                                    flag = true;
+
+                                    // 현재 플레이어가 이겼다라는 예외처리경우 게임이 종료
+                                    currPlayer.checkWin();
+
                                     break;
 
-                                } else if (topCard.getNumber() == 12) {
-                                    playerOrderManager.useQCard();
-                                    System.out.println("Q 카드가 발동됩니다 순서가 반대로 바뀝니다");
-                                    break;
-
-                                } else if(topCard.getNumber() == 13) {
-                                    playerOrderManager.useKCard();
-                                    System.out.println("K 카드가 발동됩니다 한번더 제출 가능합니다.");
+                                } else {
+                                    System.out.println("잘못된 카드 입니다.");
                                     break;
                                 }
-                                System.out.println(recievedCard);
-
-                                flag = true;
-
-                                // 현재 플레이어가 이겼다라는 예외처리경우 게임이 종료
-                                currPlayer.checkWin();
-
-                                break;
-
-                            } else {
-                                System.out.println("잘못된 카드 입니다.");
-                                break;
                             }
                         }
+
 
                     } // turn loop
 
@@ -196,6 +202,7 @@ public class Main {
             }
         }
     }
+
 
 
 }

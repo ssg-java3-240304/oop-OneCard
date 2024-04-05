@@ -6,26 +6,25 @@ import java.util.*;
 
 public class CardDeck {
     List<Card> cardDeck =  new ArrayList<>();
-    public int length;
+
 
     public CardDeck() {
     }
 
-    public CardDeck(List<Card> cardDeck, Random rand, int length) {
+    public CardDeck(List<Card> cardDeck, Random rand) {
         this.cardDeck = cardDeck;
-        this.length = length;
+
     }
 
     public void addCard(Card card) {
         cardDeck.add(card);
-        length += 1;
+
     }
     public Card removeCard(int index) {
-        length -= 1;
         return cardDeck.remove(index);
     }
     public boolean removeCard(Card card) {
-        length -= 1;
+
         return cardDeck.remove(card);
     }
     public Card getCard(int index) {
@@ -40,7 +39,9 @@ public class CardDeck {
         Collections.shuffle(cardDeck);
     }
     public Card getTopCard() {
-        return cardDeck.get(cardDeck.size() - 1);
+        if(!cardDeck.isEmpty())
+            return cardDeck.get(cardDeck.size() - 1);
+        else return null;
     }
     public void printDeque() {
         System.out.println(this.cardDeck);
@@ -55,11 +56,7 @@ public class CardDeck {
     }
 
     public int getLength() {
-        return length;
-    }
-
-    public void setLength(int length) {
-        this.length = length;
+        return cardDeck.size();
     }
 
 }
