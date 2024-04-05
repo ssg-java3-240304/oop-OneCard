@@ -44,7 +44,6 @@ public class DeckControlManager {
     public Card drawCard() {
         Card card = openDeck.getTopCard();
         openDeck.removeCard(card);
-        garbageDeck.addCard(card);
         return card;
     }
 
@@ -54,7 +53,23 @@ public class DeckControlManager {
 
     public Card popTopOpenDeck() {
         Card card = openDeck.getTopCard();
-        openDeck.removeCard(card);
+        if(card != null) {
+            openDeck.removeCard(card);
+            return card;
+        }
+        else{//오픈덱 없을 때
+            if(garbageDeck.getLength() > 0) {
+                garbageDeck.shuffle();
+                while (openDeck.getLength() > 0)
+                    openDeck.addCard(garbageDeck.getTopCard());
+                card = openDeck.getTopCard();
+            }
+            else {
+                card = null;
+
+                System.out.println("뽑을 카드가 없습니다.");
+            }
+        }
         return card;
     }
 

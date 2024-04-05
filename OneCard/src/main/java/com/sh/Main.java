@@ -57,7 +57,9 @@ public class Main {
             for(int i = 0; i < numPlayers; ++i) {
                 Player currPlayer = playerOrderManager.getCurrentPlayer();
                 for(int t = 0; t < cardNums; ++t) {
-                    currPlayer.insertCard(deckControlManager.popTopOpenDeck());
+                    Card card = deckControlManager.popTopOpenDeck();
+                    if(card != null)
+                        currPlayer.insertCard(card);
                 }
                 playerOrderManager.nextTurnChange();
             }
@@ -67,7 +69,6 @@ public class Main {
             playerOrderManager.decidePlayerOrder();
             //오픈 덱에서 카드 한장 공개
             Card topCard = deckControlManager.drawCard();
-
             try {
 
                 // Game start
@@ -95,22 +96,26 @@ public class Main {
 
                         if (response.equals("N") || response.equals("no")) {
                             if (!flag) {
-                                Card tempCard = deckControlManager.popTopOpenDeck();
-                                currPlayer.insertCard(tempCard);
-                                System.out.println("카드 한장을 가져갑니다.");
+                                Card card = deckControlManager.popTopOpenDeck();
+                                if(card != null) {
+                                    currPlayer.insertCard(card);
+                                    System.out.println("카드 한장을 가져갑니다.");
+                                }
+
                                 currPlayer.printDeck();
                             }
                             System.out.println("NO");
                             break;
                         }
+                        else {
+                            while (true) {
 
-                        while (true) {
+                                // 카드 인데스 인풋 받기
 
-                            // 카드 인데스 인풋 받기
+                                System.out.println("카드를 선택해 주세요.");
+                                System.out.println("1 부터 " + currPlayer.getCardDeck().getLength() + "사이에서 고르세요");
 
-                            System.out.println("카드를 선택해 주세요.");
-                            System.out.println("1 부터 " + currPlayer.getCardDeck().length + "사이에서 고르세요");
-
+                                int cardIndex = scanner.nextInt();
                             try {
                                 int cardIndex = scanner.nextInt();
 
@@ -163,6 +168,7 @@ public class Main {
                             }
                         }
 
+
                     } // turn loop
 
                     // 다음 차례 플레이어
@@ -198,6 +204,7 @@ public class Main {
             }
         }
     }
+
 
 
 }
