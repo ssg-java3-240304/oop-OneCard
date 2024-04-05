@@ -1,9 +1,6 @@
 package com.sh;
 
-import java.util.LinkedList;
-import java.util.Objects;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 
 import com.sh.component.DeckControlManager;
@@ -14,7 +11,7 @@ import com.sh.objectType.card.Card;
 
 public class Main {
 
-    public static int cardNums = 1;
+    public static int cardNums = 7;
 
     public static void main(String[] args) {
 
@@ -82,6 +79,7 @@ public class Main {
                     // 한장이라도 냈는지 안냈는지
                     boolean flag = false;
 
+                    turn:
                     while (true) {
                         System.out.println((currPlayer.getId() + 1) + " 번째 플레이어 입니다");
 
@@ -111,13 +109,15 @@ public class Main {
                             break;
                         }
 
-                            while (true) {
+                        while (true) {
 
-                                // 카드 인데스 인풋 받기
+                            // 카드 인데스 인풋 받기
 
-                                System.out.println("카드를 선택해 주세요.");
-                                System.out.println("1 부터 " + currPlayer.getCardDeck().getLength() + "사이에서 고르세요");
 
+                            System.out.println("카드를 선택해 주세요.");
+                            System.out.println("1 부터 " + currPlayer.getCardDeck().getLength() + "사이에서 고르세요");
+
+                            try {
                                 int cardIndex = scanner.nextInt();
 
                                 cardIndex -= 1;
@@ -138,17 +138,17 @@ public class Main {
                                     if (topCard.getNumber() == 11) {
                                         playerOrderManager.useJCard();
                                         System.out.println("J 카드가 발동됩니다 플레이어 한명 건너뜁니다");
-                                        break;
+                                        break turn;
 
                                     } else if (topCard.getNumber() == 12) {
                                         playerOrderManager.useQCard();
                                         System.out.println("Q 카드가 발동됩니다 순서가 반대로 바뀝니다");
-                                        break;
+                                        break turn;
 
                                     } else if (topCard.getNumber() == 13) {
                                         playerOrderManager.useKCard();
                                         System.out.println("K 카드가 발동됩니다 한번더 제출 가능합니다.");
-                                        break;
+                                        break turn;
                                     }
                                     System.out.println(recievedCard);
 
@@ -160,10 +160,15 @@ public class Main {
                                     break;
 
                                 } else {
-                                    System.out.println("잘못된 카드 입니다.");
-                                    break;
+                                    // 낼 수 없는 카드
+                                    throw new IndexOutOfBoundsException();
                                 }
-                            }
+                                } catch (IndexOutOfBoundsException | InputMismatchException ex) {
+                                    System.out.println("잘못된 선택 입니다.");
+                                    break;
+                            } // try
+
+                        }
 
 
                     } // turn loop
