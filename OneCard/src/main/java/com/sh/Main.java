@@ -1,9 +1,6 @@
 package com.sh;
 
-import java.util.LinkedList;
-import java.util.Objects;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 
 import com.sh.component.DeckControlManager;
@@ -119,6 +116,8 @@ public class Main {
                                 System.out.println("1 부터 " + currPlayer.getCardDeck().getLength() + "사이에서 고르세요");
 
                                 int cardIndex = scanner.nextInt();
+                            try {
+                                int cardIndex = scanner.nextInt();
 
                                 cardIndex -= 1;
 
@@ -145,7 +144,7 @@ public class Main {
                                         System.out.println("Q 카드가 발동됩니다 순서가 반대로 바뀝니다");
                                         break;
 
-                                    } else if (topCard.getNumber() == 13) {
+                                    } else if(topCard.getNumber() == 13) {
                                         playerOrderManager.useKCard();
                                         System.out.println("K 카드가 발동됩니다 한번더 제출 가능합니다.");
                                         break;
@@ -160,9 +159,12 @@ public class Main {
                                     break;
 
                                 } else {
-                                    System.out.println("잘못된 카드 입니다.");
-                                    break;
+                                    // 낼 수 없는 카드
+                                    throw new IndexOutOfBoundsException();
                                 }
+                            } catch (IndexOutOfBoundsException | InputMismatchException ex) {
+                                System.out.println("잘못된 선택 입니다.");
+                                break;
                             }
                         }
 
