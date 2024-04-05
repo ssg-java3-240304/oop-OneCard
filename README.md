@@ -1,7 +1,7 @@
 # oop-OneCard
 클래스 다이어 그램
 
-![Monkeys - Page 1 (1)](https://github.com/ssg-java3-240304/oop-OneCard/assets/43637355/9ce5471b-a834-43a4-9e5f-ab575344a2c0)
+![Monkeys - Page 1 (2)](https://github.com/ssg-java3-240304/oop-OneCard/assets/43637355/6e87e45d-eed4-4cf0-880d-1eb7993e1448)
 
 <br>
 프로그램 흐름도
